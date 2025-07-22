@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 100px 20px 60px;
+            background-color: #000000;
+            color: #ffffff;
+            position: relative;
+            animation: fadeSlideDown 1.5s ease-in-out;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background-color: #ffffff;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        p.header-sub {
+            font-size: 1.2em;
+            color: #dddddd;
+        }
+        
+        img.profile-pic {
+            display: block;
+            margin: 30px auto 10px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+            object-fit: cover;
+            animation: pulse 3s infinite;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 16px 0;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 1px solid #dddddd;
+        }
+        
+        nav a {
+            font-family: 'Montserrat', sans-serif;
+            color: #000000;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            left: 0;
+            bottom: -6px;
+            background-color: #000000;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #000000;
+            transform: scale(1.05);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .spacer {
+            height: 90px;
+        }
+        
+        section {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: auto;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #111111;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #000000;
+            margin-top: 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        ul li {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            margin: 12px 0;
+            padding: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            animation: fadeIn 0.5s ease forwards;
+            cursor: pointer;
+        }
+        
+        ul li:hover {
+            background-color: #f7f7f7;
+        }
+        
+        .service-details {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #444444;
+        }
+        
+        .show-details .service-details {
+            display: block !important;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000000;
+            color: #f0f0f0;
+        }
+        
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 15px #eeeeee;
+            }
+            50% {
+                box-shadow: 0 0 25px #dddddd;
+            }
+        }
+        
+        .toggle-icon {
+            float: right;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .show-details .toggle-icon {
+            content: "-";
+            transform: rotate(45deg);
+            /* Makes + look like × for a subtle change */
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 16px 0;
+            border-bottom: 1px solid #dddddd;
+        }
+        /* Hide hamburger on desktop */
+        
+        .mobile-nav {
+            display: none;
+        }
+        /* Hamburger styles for mobile */
+        
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 2em;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 2000;
+        }
+        /* Mobile nav menu */
+        
+        .mobile-menu-active nav {
+            display: block;
+            flex-direction: column;
+            text-align: center;
+            background-color: #ffffff;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+            }
+            .mobile-nav {
+                display: block;
+            }
+            nav a {
+                margin: 10px 0;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile-nav">
+        <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+    </div>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#why-work">Why Work With Me</a>
+        <a href="#experience">Experience</a>
+        <a href="#thank-you">Thank You</a>
+    </nav>
+
+    <div class="spacer"></div>
+
+    <header style="background-image: url('images/faraaz-zuberi-YoIq2GyYcAU-unsplash.jpg'); background-size: cover; background-position: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+              background-image: url('images/faraaz-zuberi-YoIq2GyYcAU-unsplash.jpg');
+              background-size: cover; background-position: center; z-index: 1;">
+        </div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+              background-color: rgba(0, 0, 0, 0.6); z-index: 2;">
+        </div>
+
+        <div style="position: relative; z-index: 3;">
+            <h1>Hi, I'm Gretel Ann Esguerra</h1>
+            <img src="images/profile.png" alt="Profile Picture" class="profile-pic">
+            <p class="header-sub">Virtual Assistant Profile | Driven to provide seamless virtual support with a personal touch.</p>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+
+        <p>Hi! I’m Gretel Ann — a versatile and reliable Virtual Assistant with a strong background in admin support, customer service, and travel management. With years of experience in fast-paced, client-facing roles, I specialize in keeping operations
+            smooth, clients happy, and tasks done right the first time.
+        </p>
+        <p>I’ve worked as a Student Admin at Masterschool, handling everything from tech issues to payment concerns, enrollment documents, and live chat support, making sure every student got the assistance they needed with efficiency and empathy.
+        </p>
+        <p>I also joined TravelPerk as a Travel Agent, where I helped clients book flights and accommodations tailored to their preferences and budgets. Always aiming to deliver what we called a “7-star experience,” going the extra mile every time.</p>
+        <p>My hard work paid off when I was promoted to Subject Matter Expert (SME). In that role, I supported both new and tenured agents, created learning materials, analyzed recurring issues, led Excel-based reporting, and worked closely with management
+            to improve service delivery and system transitions.
+        </p>
+        <p>On top of all that, I’ve also had solid experience in the BPO industry as a Technical Support, Customer Support, and Sales Agent, giving me the ability to communicate clearly, solve problems fast, and handle pressure with a smile.
+        </p>
+        <p>I bring to the table a strong mix of organizational skills, tech-savviness, client empathy, and the ability to adapt and grow with your business. Let’s make your day easier. One task at a time.</p>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Services Offered</h2>
+        <ul>
+            <li onclick="toggleDetails(this)">Administrative Support
+                <span class="toggle-icon">+</span>
+                <div class="service-details">• Live chat support & inbox management</div>
+                <div class="service-details">• Calendar scheduling & meeting coordination</div>
+                <div class="service-details">• Document creation and formatting</div>
+                <div class="service-details">• Processing certificates, proof of enrollment, and other documents</div>
+                <div class="service-details">• Payment and tech issue resolution support</div>
+            </li>
+            <li onclick="toggleDetails(this)">Travel Management
+                <span class="toggle-icon">+</span>
+                <div class="service-details">• Flight and hotel booking tailored to client needs & budget</div>
+                <div class="service-details">• Itinerary planning and changes</div>
+                <div class="service-details">• Travel coordination for business or leisure</div>
+                <div class="service-details">• VIP-level support and concierge-style service</div>
+            </li>
+            <li onclick="toggleDetails(this)">Team & Project Support
+                <span class="toggle-icon">+</span>
+                <div class="service-details">• Onboarding assistance for new agents or team members</div>
+                <div class="service-details">• Creation of training materials & internal guides</div>
+                <div class="service-details">• Adapting team to new tools or systems</div>
+                <div class="service-details">• Data collection, Excel reporting, and insights for process improvement</div>
+                <div class="service-details">• Coordination with upper management for escalated concerns</div>
+            </li>
+            <li onclick="toggleDetails(this)">Customer Support and Sales
+                <span class="toggle-icon">+</span>
+                <div class="service-details">• Chat, and email support</div>
+                <div class="service-details">• Handling technical issues with calm and clarity</div>
+                <div class="service-details">• Upselling and cross-selling based on client needs</div>
+                <div class="service-details">• CRM tool familiarity and multi-tasking across platforms</div>
+            </li>
+            <li onclick="toggleDetails(this)">Basic Video Editing
+                <span class="toggle-icon">+</span>
+                <div class="service-details">• Trimming, cutting, and stitching clips</div>
+                <div class="service-details">• Adding music, subtitles, and transitions</div>
+                <div class="service-details">• Simple YouTube/social media video formatting</div>
+            </li>
+        </ul>
+
+
+    </section>
+
+    <section id="why-work">
+        <h2 class="section-title">Why Work With Me?</h2>
+        <ul>
+            <li onclick="toggleDetails(this)">Experience That Delivers
+                <span class="toggle-icon">+</span>
+                <div class="service-details">With a solid background in admin, travel, tech support, and customer service, I bring years of hands-on experience — not just theory. I’ve helped both startups and global teams run smoother, faster, and more efficiently.
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">Versatile, Tech-Savvy, and Reliable
+                <span class="toggle-icon">+</span>
+                <div class="service-details">From managing live chats and handling bookings to editing videos and crunching data on Excel, I’m comfortable wearing multiple hats and adapting to new tools or systems. Without needing constant guidance</div>
+            </li>
+            <li onclick="toggleDetails(this)">People-Centered, Results-Focuse
+                <span class="toggle-icon">+</span>
+                <div class="service-details">I combine empathy with efficiency. Whether I’m supporting a team, assisting a customer, or organizing your calendar, I always aim for results without losing the human touch.
+                </div>
+            </li>
+            <li onclick="toggleDetails(this)">A Team Player You Can Actually Count On
+                <span class="toggle-icon">+</span>
+                <div class="service-details">I’m not just here to "help out" I’m here to grow with you. I value clear communication, mutual trust, and doing the job right (and a little early, if possible!).
+                </div>
+            </li>
+
+        </ul>
+    </section>
+
+    <script>
+        function toggleDetails(element) {
+            const isOpen = element.classList.contains('show-details');
+            document.querySelectorAll('ul li').forEach(li => {
+                li.classList.remove('show-details');
+                const icon = li.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '+';
+            });
+            if (!isOpen) {
+                element.classList.add('show-details');
+                const icon = element.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '−';
+
+
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.body.classList.toggle('mobile-menu-active');
+        }
+    </script>
+
+    <section id="experience">
+        <h2 class="section-title">Experience Summary</h2>
+        <p><strong>Travel Management & Support – TravelPerk</strong><br> • Handled flight and hotel bookings via TravelPerk's proprietary platform and third-party websites (e.g., Booking.com, Expedia) <br> • Managed booking requests, cancellations, and modifications
+            through <strong>Zendesk</strong><br> • Delivered high-level customer service by tailoring travel options based on client budgets and preferences <br> • Collaborated with internal teams to resolve booking issues and ensure seamless travel experiences
+            <br> • Experience with time-sensitive requests, multitasking, and client escalation handling
+        </p>
+        <p><strong>Subject Matter Expert (SME) – TravelPerk</strong> <br> • Created and maintained <strong>Google Sheets </strong>reports to track agent performance and recurring issues
+            <br>• Provided real-time support to agents via Slack, assisting with escalated or complex bookings
+            <br>• Curated and updated internal Knowledge Base materials
+            <br>• Coordinated with management for operational improvements and training rollouts
+            <br>• Designed teaser/event videos to promote internal company events and initiatives
+        </p>
+
+        <p><strong>Student Admin Support – Masterschool</strong>
+            <br>• Delivered Tier 1 chat support through <strong>Intercom</strong>, resolving concerns on tech issues, payments, certificates, and more
+            <br>• Navigated and updated student data via <strong>HubSpot</strong>
+            <br>• Used <strong>Slack</strong> for internal communication and collaboration with the support team
+            <br>• Contributed to <strong>Notion</strong>-based knowledge hubs and weekly updates to improve workflows and support materials
+
+        </p>
+
+        <p><strong>Call Center Background – Telstra, HTC, Verizon, Asurion
+</strong> <br> • Experience in technical support, customer service, and sales across major telecom and tech accounts
+            <br>• Adapted quickly to each brand’s proprietary systems and tools
+            <br>• Delivered scripted and non-scripted assistance via voice, chat, and email support
+            <br>• Recognized for problem-solving, upselling, and maintaining high CSAT (Customer Satisfaction) scores
+
+
+        </p>
+
+    </section>
+
+    <section id="thank-you">
+        <h2 class="section-title">Thank You</h2>
+        <p>Thank you for taking the time to get to know me and the work I do. Whether you need someone to handle the dayto-day tasks, support your clients, or help your business run smoother — I’d love to be that extra set of hands you can count on. Looking
+            forward to working with you!</p>
+    </section>
+
+    <footer style="text-align: center; padding: 20px; background-color: #000000; color: #f0f0f0;">
+        <p>Contact Zhike Esguerra for payment</p>
+
+        <script>
+            // Smooth scroll for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Toggle details for services and why work
+            function toggleDetails(element) {
+                const isOpen = element.classList.contains('show-details');
+                document.querySelectorAll('ul li').forEach(li => li.classList.remove('show-details'));
+                if (!isOpen) {
+                    element.classList.add('show-details');
+                }
+            }
+        </script>
+</body>
+
+</html>
